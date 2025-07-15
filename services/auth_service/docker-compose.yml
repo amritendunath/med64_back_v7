@@ -1,0 +1,14 @@
+version: "3.9"  # Or another version
+
+services:
+  auth_service:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Assuming you have a Dockerfile
+    ports:
+      - "5004:5004"
+    environment:
+      - .env
+      # Your environment variables here
+      # DATABASE_URL: your_database_url
+    # Other configurations like volumes, depends_on, etc.

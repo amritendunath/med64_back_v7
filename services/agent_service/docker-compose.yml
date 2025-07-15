@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  agent_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - .env
+    # Other configurations like volumes, depends_on, etc.
