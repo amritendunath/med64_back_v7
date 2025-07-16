@@ -1,3 +1,4 @@
+version: "3.8"
 
 services:
   agent_service:
@@ -7,6 +8,8 @@ services:
     ports:
       - "8000:8000"
     env_file: ./agent_service/.env
+    networks:
+      - app_network
 
   auth_service:
     build:
@@ -15,3 +18,22 @@ services:
     ports:
       - "5004:5004"
     env_file: ./auth_service/.env
+    networks:
+      - app_network
+
+  nginx:
+    image: nginx:1.29-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - auth_service
+      - agent_service
+    restart: always
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
