@@ -120,7 +120,7 @@ class MicrosoftOAuth:
             )
             self.logger.info(f"Access Token: {access_token}")
 
-            frontend_url = os.environ.get("FRONTEND_URL", "http://localhost:3000")
+            frontend_url = os.environ.get("FRONTEND_URL")
             redirect_url = f"{frontend_url}/auth-callback?token={access_token}"
             return RedirectResponse(redirect_url)
 
